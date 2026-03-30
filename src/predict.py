@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import pickle
 from tensorflow.keras.models import load_model
 

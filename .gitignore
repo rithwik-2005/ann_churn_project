@@ -1,7 +1,5 @@
 __pycache__/
 *.py[cod]
-*.h5
-*.pkl
 .env
 venv/
 logs/
@@ -10,3 +8,4 @@ logs/
 dist/
 build/
 Churn_Modelling.csv
+ann/
