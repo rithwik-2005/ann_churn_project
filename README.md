@@ -1,6 +1,10 @@
-#  Customer Churn Prediction — ANN
+# Customer Churn Prediction — ANN
 
 A production-ready customer churn prediction app built with TensorFlow/Keras and Streamlit. The model is an Artificial Neural Network (ANN) trained on bank customer data to predict whether a customer will leave.
+
+## Live Demo
+
+[https://ann-churn-prediction-ovlb.onrender.com](https://ann-churn-prediction-ovlb.onrender.com)
 
 ---
 
@@ -9,15 +13,15 @@ A production-ready customer churn prediction app built with TensorFlow/Keras and
 ```
 ann_churn/
 ├── src/
-│   ├── preprocess.py        # Data loading, encoding, scaling
-│   ├── model.py             # ANN architecture and training
-│   └── predict.py           # Load artifacts and run inference
-├── artifacts/               # Saved model + encoders (gitignored)
+│   ├── preprocess.py        
+│   ├── model.py             
+│   └── predict.py           
+├── artifacts/               
 ├── .github/
 │   └── workflows/
-│       └── ci_cd.yml        # GitHub Actions CI/CD pipeline
-├── app.py                   # Streamlit web app
-├── train.py                 # Training entry point
+│       └── ci_cd.yml        
+├── app.py                   
+├── train.py                 
 ├── requirements.txt
 ├── Dockerfile
 ├── render.yaml
@@ -26,12 +30,12 @@ ann_churn/
 
 ---
 
-##  Quickstart
+## Quickstart
 
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/<your-username>/ann-churn-prediction.git
+git clone https://github.com/rithwik-2005/ann-churn-prediction.git
 cd ann-churn-prediction
 pip install -r requirements.txt
 ```
@@ -44,7 +48,7 @@ Place `Churn_Modelling.csv` in the project root, then run:
 python train.py
 ```
 
-This saves `model.h5`, `label_encoder_gender.pkl`, `onehot_encoder_geo.pkl`, and `scaler.pkl` to the `artifacts/` folder.
+This saves the model and encoders to the `artifacts/` folder.
 
 ### 3. Run the web app
 
@@ -54,13 +58,13 @@ streamlit run app.py
 
 ---
 
-##  Docker
+## Docker
 
 ### Build and run locally
 
 ```bash
-docker build -t <your_dockerhub_username>/ann-churn-prediction:latest .
-docker run -p 8501:8501 <your_dockerhub_username>/ann-churn-prediction:latest
+docker build -t rithwik_2005/ann-churn-prediction:latest .
+docker run -p 8501:8501 rithwik_2005/ann-churn-prediction:latest
 ```
 
 Open `http://localhost:8501`
@@ -69,12 +73,12 @@ Open `http://localhost:8501`
 
 ```bash
 docker login
-docker push <your_dockerhub_username>/ann-churn-prediction:latest
+docker push rithwik_2005/ann-churn-prediction:latest
 ```
 
 ---
 
-##  CI/CD (GitHub Actions)
+## CI/CD (GitHub Actions)
 
 The pipeline in `.github/workflows/ci_cd.yml` automatically:
 
@@ -85,32 +89,29 @@ The pipeline in `.github/workflows/ci_cd.yml` automatically:
 
 ### Required GitHub Secrets
 
-Go to **Settings → Secrets and Variables → Actions** and add:
-
 | Secret | Value |
 |--------|-------|
 | `DOCKER_USERNAME` | Your Docker Hub username |
-| `DOCKER_PASSWORD` | Your Docker Hub password or access token |
+| `DOCKER_PASSWORD` | Your Docker Hub access token |
 | `RENDER_DEPLOY_HOOK_URL` | Your Render deploy hook URL |
 
 ---
 
-##  Deploy on Render
+## Deploy on Render
 
-1. Push your code (with the `artifacts/` folder included or use Render environment) to GitHub
+1. Push your code to GitHub
 2. Go to [render.com](https://render.com) → New → Web Service
-3. Connect your GitHub repo
-4. Render auto-detects the `render.yaml` and deploys using Docker
-5. Or set **Deploy Hook URL** in Render dashboard and add it as a GitHub secret
+3. Connect your GitHub repo and select **Docker** as environment
+4. Render auto-detects `render.yaml` and deploys
 
 ---
 
-##  Model Details
+## Model Details
 
 | Component | Detail |
 |-----------|--------|
-| Architecture | ANN — 64 → 32 → 1 (sigmoid) |
-| Optimizer | Adam (lr=0.01) |
+| Architecture | ANN — 128 → 64 → 32 → 1 (sigmoid) |
+| Optimizer | Adam (lr=0.001) |
 | Loss | Binary Cross-Entropy |
 | Dataset | [Churn Modelling (Kaggle)](https://www.kaggle.com/datasets/shrutimechlearn/churn-modelling) |
 | Accuracy | ~86% on test set |
@@ -121,13 +122,7 @@ Go to **Settings → Secrets and Variables → Actions** and add:
 
 ---
 
-##  Dataset
-
-Download `Churn_Modelling.csv` from [Kaggle](https://www.kaggle.com/datasets/shrutimechlearn/churn-modelling) and place it in the project root before training.
-
----
-
-##  Tech Stack
+## Tech Stack
 
 - **Model**: TensorFlow / Keras
 - **App**: Streamlit
